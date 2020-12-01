@@ -1,0 +1,68 @@
+.main-div{
+    border:1px solid #F2F2F2;
+    margin-top: 20px;
+    background-color: #F2F2F2;
+}
+
+.header-text{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.label-text{
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.data-text{
+    color:#686DA4;
+}
+.card-body-text{
+    border-bottom: 1px solid #000;
+    padding-bottom: 2px;
+    text-align: center;
+    
+}
+
+.card-img{
+    padding: 15px;
+}
+
+.year-btn{
+    height: 30px;
+    background-color: #C5E09B;
+
+     &:hover{
+        background-color: #A1CE4A;
+     }
+}
+
+.deselectedBtn {
+    background-color: #C5E09B;
+}
+
+.selectedBtn {
+    background-color: #A1CE4A;
+}
+.col-btn{
+    margin-bottom: 10px;
+    width: 50%;
+    text-align: center;
+    display: inline-block;
+}
+
+.footer-text{
+    text-align: center;
+    font-weight: bold;
+}
+
+.left-container{
+    width: 300px;
+}
+
+
+.title-text{
+    color:#444D93;
+    font-size: 15px;
+    margin-top: -25px;
+}

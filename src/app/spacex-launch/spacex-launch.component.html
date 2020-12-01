@@ -1,0 +1,65 @@
+<div class="container-fluid main-div" >
+    <p class="header-text">SpaceX Launch Programs</p>
+    <div class="parent-container row">
+      <div class="col-xs-12 col-md-4 col-lg-2">
+          <div class="row">
+              <div class="col">
+                <div class="card">
+                  <p class="label-text"> Filters </p>
+                   <div class="card-body">
+                       <p class="card-body-text">Launch Year</p>
+                       <div role="group" aria-label="Launch year">
+                         <div class="col-btn" *ngFor="let year of yearArr">
+                           <button type="button" id="launch_year_{{year}}" class="btn  btn-md year-btn shadow-none" [ngClass]="launch_year === year ? 'selectedBtn' : 'deselectedBtn'" (click)="showLaunchYear(year)">{{year}}</button>
+                         </div>
+                        </div>
+                   </div>
+                   <div class="card-body">
+                     <p class="card-body-text"> Successful Launch</p>
+                     <div role="group" aria-label="Successful Launch">
+                       <div class="col-btn">
+                         <button type="button" class="btn  btn-md year-btn shadow-none" id="launch_success_true" [ngClass]="launch_success === true ? 'selectedBtn' : 'deselectedBtn'" (click)="showLaunchSuccess(true)">True</button>
+                        </div>
+                        <div class="col-btn">
+                         <button type="button" class="btn  btn-md year-btn shadow-none" id="launch_success_false" [ngClass]="launch_success === false ? 'selectedBtn' : 'deselectedBtn'"  (click)="showLaunchSuccess(false)">False</button>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="card-body">
+                     <p class="card-body-text">Successful Landing</p>
+                    <div role="group" aria-label="Successful Land">
+                      <div class="col-btn">
+                         <button type="button" aria-label="Successful land true" id="land_success_true" class="btn  btn-md year-btn shadow-none" [ngClass]="land_success === true ? 'selectedBtn' : 'deselectedBtn'" (click)="showLandSuccess(true)">True</button>
+                        </div>
+                         <div class="col-btn">
+                         <button type="button" aria-label="Successful land false" id="land_success_false" class="btn  btn-md year-btn shadow-none" [ngClass]="land_success === false ? 'selectedBtn' : 'deselectedBtn'" (click)="showLandSuccess(false)">False</button>
+                         </div>
+                     </div>
+                    </div>
+                 </div>
+              </div>
+          </div>
+      </div>
+  
+      <div class="col-xs-12 col-md-8 col-lg-10">
+          <div class="row">
+            <p>{{errorMessage}}</p>
+              <div class="col-xs-12 col-md-6 col-lg-3" *ngFor="let spacexData of spacexlaunchData">
+                <div class="card-deck">
+                  <div class="card mission-card">
+                    <img class="card-img-top card-img" src="https://via.placeholder.com/150" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="title-text">{{spacexData.mission_name}} #{{spacexData.flight_number}}</h5>
+                      <p class="card-text label-text"> Mission Ids: <span class="data-text">{{spacexData.mission_id}}</span></p>
+                      <p class="card-text label-text"> Launch Year: <span class="data-text">{{spacexData.launch_year}}</span></p>
+                      <p class="card-text label-text"> Successful Launch: <span class="data-text">{{!!spacexData.launch_success}}</span></p>
+                      <p class="card-text label-text"> Successful Landing: <span class="data-text">{{getLandingData(spacexData.rocket.first_stage.cores)}}</span></p>
+                    </div>
+                  </div>     
+              </div>   
+            </div>
+          </div>
+       </div>
+</div>
+ <p class="footer-text">Developed by : Nisha Yadu</p>  
+</div>
