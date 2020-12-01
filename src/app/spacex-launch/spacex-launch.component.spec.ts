@@ -7,6 +7,9 @@ import { SpacexService } from '../services/spacex.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import {  of } from 'rxjs';
 import  {fixtureData}  from './fixture';
+import { MissionCardComponent } from './mission-card/mission-card.component';
+import { FilterComponent } from './filter/filter.component';
+import { SpaceXDataFilters } from '../types';
 
 fdescribe('SpacexLaunchComponent', () => {
   let component: SpacexLaunchComponent;
@@ -16,7 +19,8 @@ fdescribe('SpacexLaunchComponent', () => {
 
   beforeEach(async () => {
     spacexServiceSpy = jasmine.createSpyObj<SpacexService>('SpacexService', ['getSpaceXLaunchData']);
-    spacexServiceSpy.getSpaceXLaunchData.and.callFake(function(launch_success, land_success, launch_year){ 
+    spacexServiceSpy.getSpaceXLaunchData.and.callFake(function(filter: SpaceXDataFilters){ 
+      const {launch_year, launch_success, land_success} = filter;
       let filteredData = fixtureData;
       if(launch_success !== undefined){
         filteredData = filteredData.filter((item)=>{
@@ -37,7 +41,7 @@ fdescribe('SpacexLaunchComponent', () => {
       return of(filteredData)
     });
     await TestBed.configureTestingModule({
-      declarations: [ SpacexLaunchComponent ],
+      declarations: [ SpacexLaunchComponent, MissionCardComponent, FilterComponent ],
       providers: [{ provide: SpacexService, useValue: spacexServiceSpy }],
       imports:[RouterTestingModule]
     })

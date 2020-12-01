@@ -1,0 +1,29 @@
+<div class="card mission-card">
+  <img
+    class="card-img-top card-img"
+    src="https://via.placeholder.com/150"
+    alt="Card image cap"
+  />
+  <div class="card-body">
+    <h5 class="title-text">
+      {{ missionData.mission_name }} #{{ missionData.flight_number }}
+    </h5>
+    <p class="card-text label-text">
+      Mission Ids: <span class="data-text">{{ missionData.mission_id }}</span>
+    </p>
+    <p class="card-text label-text">
+      Launch Year:
+      <span class="data-text">{{ missionData.launch_year }}</span>
+    </p>
+    <p class="card-text label-text">
+      Successful Launch:
+      <span class="data-text">{{ !!missionData.launch_success }}</span>
+    </p>
+    <p class="card-text label-text">
+      Successful Landing:
+      <span class="data-text">{{
+        getLandingData(missionData.rocket.first_stage.cores)
+      }}</span>
+    </p>
+  </div>
+</div>

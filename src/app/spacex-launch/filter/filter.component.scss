@@ -1,0 +1,37 @@
+.label-text {
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+.card-body-text {
+  border-bottom: 1px solid #000;
+  padding-bottom: 2px;
+  text-align: center;
+}
+
+.year-btn {
+  height: 30px;
+  background-color: #c5e09b;
+
+  &:hover {
+    background-color: #a1ce4a;
+  }
+}
+
+.deselectedBtn {
+  background-color: #c5e09b;
+}
+
+.selectedBtn {
+  background-color: #a1ce4a;
+}
+.col-btn {
+  margin-bottom: 10px;
+  width: 50%;
+  text-align: center;
+  display: inline-block;
+}
+
+.left-container {
+  width: 300px;
+}

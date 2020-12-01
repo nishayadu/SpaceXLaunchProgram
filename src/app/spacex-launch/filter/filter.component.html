@@ -1,0 +1,85 @@
+<div class="card">
+  <p class="label-text">Filters</p>
+  <div class="card-body">
+    <p class="card-body-text">Launch Year</p>
+    <div role="group" aria-label="Launch year">
+      <div class="col-btn" *ngFor="let year of yearArr">
+        <button
+          type="button"
+          id="launch_year_{{ year }}"
+          class="btn btn-md year-btn shadow-none"
+          [ngClass]="
+            filters.launch_year === year ? 'selectedBtn' : 'deselectedBtn'
+          "
+          (click)="filterByLaunchYear(year)"
+        >
+          {{ year }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="card-body-text">Successful Launch</p>
+    <div role="group" aria-label="Successful Launch">
+      <div class="col-btn">
+        <button
+          type="button"
+          class="btn btn-md year-btn shadow-none"
+          id="launch_success_true"
+          [ngClass]="
+            filters.launch_success === true ? 'selectedBtn' : 'deselectedBtn'
+          "
+          (click)="filterByLaunchSuccess(true)"
+        >
+          True
+        </button>
+      </div>
+      <div class="col-btn">
+        <button
+          type="button"
+          class="btn btn-md year-btn shadow-none"
+          id="launch_success_false"
+          [ngClass]="
+            filters.launch_success === false ? 'selectedBtn' : 'deselectedBtn'
+          "
+          (click)="filterByLaunchSuccess(false)"
+        >
+          False
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="card-body-text">Successful Landing</p>
+    <div role="group" aria-label="Successful Land">
+      <div class="col-btn">
+        <button
+          type="button"
+          aria-label="Successful land true"
+          id="land_success_true"
+          class="btn btn-md year-btn shadow-none"
+          [ngClass]="
+            filters.land_success === true ? 'selectedBtn' : 'deselectedBtn'
+          "
+          (click)="filterByLandSuccess(true)"
+        >
+          True
+        </button>
+      </div>
+      <div class="col-btn">
+        <button
+          type="button"
+          aria-label="Successful land false"
+          id="land_success_false"
+          class="btn btn-md year-btn shadow-none"
+          [ngClass]="
+            filters.land_success === false ? 'selectedBtn' : 'deselectedBtn'
+          "
+          (click)="filterByLandSuccess(false)"
+        >
+          False
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

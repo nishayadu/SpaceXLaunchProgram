@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from '@angula
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, shareReplay } from 'rxjs/operators';
-
+import type { SpaceXDataFilters } from 'src/app/types';
 
 // as the SpaceXData is mostly static, we will cache the data for 10 mins for a given url
 const  spaceXDataCache = {};
@@ -15,20 +15,21 @@ export class SpacexService {
   constructor(private __http: HttpClient) { }
 
   // to fetch data from API based on the filter value
-  public getSpaceXLaunchData(launch_success, land_success, launch_year) : Observable<any>{
+  public getSpaceXLaunchData(filters: SpaceXDataFilters) : Observable<any>{
+    const {launch_success, land_success, launch_year} = filters;
     // form query parameter based on filters
     const params = new URLSearchParams ();
 
     params.append("limit", "100");
 
     if(launch_success !== undefined){
-      params.append("launch_success", launch_success );
+      params.append("launch_success", launch_success.toString());
     }
     if(land_success !== undefined){
-      params.append("land_success", land_success );
+      params.append("land_success", land_success.toString());
     }
     if(launch_year){
-      params.append("launch_year", launch_year );
+      params.append("launch_year", launch_year);
     }
 
     const url = 'https://api.spacexdata.com/v3/launches?' + params.toString();
