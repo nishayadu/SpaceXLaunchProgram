@@ -55,4 +55,5 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 - Implemented test cases for the component load and all the 3 filters - Launch success, Land Success and Launch Year.
 
 
-LightHouse report:
+LightHouse report: 
+<img src="./lighthouse.png" alt="Light House Report" width="600"/>
