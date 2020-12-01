@@ -1,7 +1,11 @@
 import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, shareReplay } from 'rxjs/operators';
+
+
+// as the SpaceXData is mostly static, we will cache the data for 10 mins for a given url
+const  spaceXDataCache = {};
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +16,48 @@ export class SpacexService {
 
   // to fetch data from API based on the filter value
   public getSpaceXLaunchData(launch_success, land_success, launch_year) : Observable<any>{
-    let params = new HttpParams();
+    // form query parameter based on filters
+    const params = new URLSearchParams ();
+
+    params.append("limit", "100");
+
     if(launch_success !== undefined){
-      params = params.append("launch_success", launch_success );
+      params.append("launch_success", launch_success );
     }
     if(land_success !== undefined){
-      params = params.append("land_success", land_success );
+      params.append("land_success", land_success );
     }
     if(launch_year){
-      params = params.append("launch_year", launch_year );
+      params.append("launch_year", launch_year );
     }
-    // mocking spacexdata API
-    return this.__http.get('https://api.spacexdata.com/v3/launches?limit=100' , {params: params}).pipe(
-      map(data => {
-        return data;
-      }),
-      catchError(this.handleError)
+
+    const url = 'https://api.spacexdata.com/v3/launches?' + params.toString();
+
+    // if data is available on cache and is not expired (older than 5 minute) return observable from cache
+    const cachedData = spaceXDataCache[url];
+    if (cachedData && cachedData.updateTime + 30000  <= Date.now()) {
+      return cachedData.observable;
+    }
+
+    // if not cached the request url
+    const observable = this.__http.get(url).pipe(
+      shareReplay(1),
+      catchError((error) => {
+        delete spaceXDataCache[url];
+        return this.handleError(error);
+      })
     )
+
+    // add the observable back to cache and return the observable
+    spaceXDataCache[url] = {
+      updateTime: Date.now(),
+      observable: observable,
+    }
+
+    return observable;
   }
 
+  // Method to hanle error case
   handleError(error) {
   let errorMessage = '';
   if (error.error instanceof ErrorEvent) {
@@ -41,7 +68,6 @@ export class SpacexService {
     // server-side error
     errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
   }
-  //window.alert(errorMessage);
   return throwError(errorMessage);
  }
 }
