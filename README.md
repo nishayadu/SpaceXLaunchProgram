@@ -56,9 +56,12 @@ For Server Side Rendering - Angular Universal(boilerplate code)
 
 ## Build
 
-Development - Run npm run dev:ssr
-Server Side rendering - Run npm run build:ssr
-Run npm run serve:ssr
+- To run it in local enviornment, make a clone from the git repository
+- Navigate to the local directory and run "npm install" to load node_modules
+- Run below command:
+  Development - Run npm run dev:ssr
+  Server Side rendering - Run npm run build:ssr
+  Run npm run serve:ssr
 
 ## Running unit tests
 
