@@ -40,7 +40,7 @@ export class SpacexService {
       return cachedData.observable;
     }
 
-    // if not cached the request url
+    // if not available, cached the request url
     const observable = this.__http.get(url).pipe(
       shareReplay(1),
       catchError((error) => {

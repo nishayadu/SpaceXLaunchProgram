@@ -15,6 +15,7 @@ export class FilterComponent implements OnInit {
   ngOnInit(): void {
   }
   
+  // Emitting filterValues when data is filtered by launch success
   filterByLaunchSuccess(launch_success:boolean) {
     const {filters} = this;
     if (launch_success === filters.launch_success) {
@@ -25,6 +26,7 @@ export class FilterComponent implements OnInit {
     this.onFilterChange.emit(filters);
   }
 
+  // Emitting filterValues when data is filtered by land success
   filterByLandSuccess (land_success:boolean) {
     const {filters} = this;
     if (land_success === filters.land_success) {
@@ -35,6 +37,7 @@ export class FilterComponent implements OnInit {
     this.onFilterChange.emit(filters);
   }
 
+  // Emitting filterValues when data is filtered by launch year
   filterByLaunchYear(launch_year:string) {
     const {filters} = this;
     if (launch_year === filters.launch_year) {

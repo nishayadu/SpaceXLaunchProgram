@@ -19,6 +19,7 @@ export class SpacexLaunchComponent  {
       this.loadData();
   }
 
+  // loads Data when page is loaded
   private loadData() {
     const {launch_year, launch_success, land_success} =  this.route.snapshot.queryParams;
     this.filters = {
@@ -29,7 +30,7 @@ export class SpacexLaunchComponent  {
     this.loadSpaceXlaunchData();
   }
 
-  // Loads spaceXdata when the page is loaded 
+  
   private loadSpaceXlaunchData(){
     // subscribing to get the data from the API
     this.spacexService.getSpaceXLaunchData(this.filters).subscribe((data) =>{
@@ -46,6 +47,7 @@ export class SpacexLaunchComponent  {
     this.router.navigate([], { relativeTo: this.route, queryParams: urlParameters });
   }
 
+  // Getting filter value from filterComponet when ever filter is selected
   onFilterChange(filters: SpaceXDataFilters) {
     this.filters = filters;
     this.loadSpaceXlaunchData();
